@@ -1,0 +1,72 @@
+{
+    "kind": "Deployment",
+    "apiVersion": "extensions/v1beta1",
+    "metadata": {
+      "name": "dealservice",
+      "namespace": "development",
+      "labels": {
+        "SampleApp": "dealservice"
+      },
+      "annotations": {
+        "deployment.kubernetes.io/revision": "2"
+      }
+    },
+    "spec": {
+      "replicas": 1,
+      "selector": {
+        "matchLabels": {
+          "SampleApp": "dealservice"
+        }
+      },
+      "template": {
+        "metadata": {
+          "name": "dealservice",
+          "creationTimestamp": null,
+          "labels": {
+            "SampleApp": "dealservice"
+          }
+        },
+        "spec": {
+          "containers": [
+            {
+              "name": "dealservice",
+              "image": "servicesregistry.azurecr.io/ir/deal-api:latest",
+              "env": [
+                {
+                  "name": "ASPNETCORE_ENVIRONMENT",
+                  "value": "Docker"
+                }
+              ],
+              "resources": {},
+              "terminationMessagePath": "/dev/termination-log",
+              "terminationMessagePolicy": "File",
+              "imagePullPolicy": "Always",
+              "securityContext": {
+                "privileged": false
+              }
+            }
+          ],
+          "restartPolicy": "Always",
+          "terminationGracePeriodSeconds": 30,
+          "dnsPolicy": "ClusterFirst",
+          "securityContext": {},
+          "imagePullSecrets": [
+            {
+              "name": "servicesregistry"
+            }
+          ],
+          "schedulerName": "default-scheduler"
+        }
+      },
+      "strategy": {
+        "type": "RollingUpdate",
+        "rollingUpdate": {
+          "maxUnavailable": "25%",
+          "maxSurge": "25%"
+        }
+      },
+      "revisionHistoryLimit": 10,
+      "progressDeadlineSeconds": 600
+    },
+    "status": {}
+  }

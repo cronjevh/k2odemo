@@ -1,0 +1,28 @@
+{
+    "kind": "Service",
+    "apiVersion": "v1",
+    "metadata": {
+      "name": "authservice",
+      "namespace": "development",
+      "labels": {
+        "SampleApp": "authservice"
+      }
+    },
+    "spec": {
+      "ports": [
+        {
+          "protocol": "TCP",
+          "port": 80,
+          "targetPort": 80
+        }
+      ],
+      "selector": {
+        "SampleApp": "authservice"
+      },
+      "type": "ClusterIP",
+      "sessionAffinity": "None"
+    },
+    "status": {
+      "loadBalancer": {}
+    }
+  }

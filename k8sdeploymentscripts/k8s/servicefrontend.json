@@ -1,0 +1,26 @@
+{
+    "kind": "Service",
+    "apiVersion": "v1",
+    "metadata": {
+      "name": "frontend",
+      "namespace": "development",
+      "labels": {
+        "SampleApp": "frontend"
+      }
+    },
+    "spec": {
+      "ports": [
+        {
+          "protocol": "TCP",
+          "port": 80,
+          "targetPort": 80
+        }
+      ],
+      "selector": {
+        "SampleApp": "frontend"
+      },
+      "type": "ClusterIP",
+      "sessionAffinity": "None"
+    },
+    "status": {}
+  }

@@ -1,0 +1,26 @@
+{
+    "kind": "Service",
+    "apiVersion": "v1",
+    "metadata": {
+      "name": "gateway",
+      "namespace": "development",
+      "labels": {
+        "SampleApp": "gateway"
+      }
+    },
+    "spec": {
+      "ports": [
+        {
+          "protocol": "TCP",
+          "port": 80,
+          "targetPort": 80
+        }
+      ],
+      "selector": {
+        "SampleApp": "gateway"
+      },
+      "type": "ClusterIP",
+      "sessionAffinity": "None"
+    },
+    "status": {}
+  }

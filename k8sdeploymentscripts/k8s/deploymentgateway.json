@@ -1,0 +1,72 @@
+{
+    "kind": "Deployment",
+    "apiVersion": "extensions/v1beta1",
+    "metadata": {
+      "name": "gateway",
+      "namespace": "development",
+      "labels": {
+        "SampleApp": "gateway"
+      },
+      "annotations": {
+        "deployment.kubernetes.io/revision": "4"
+      }
+    },
+    "spec": {
+      "replicas": 1,
+      "selector": {
+        "matchLabels": {
+          "SampleApp": "gateway"
+        }
+      },
+      "template": {
+        "metadata": {
+          "name": "gateway",
+          "creationTimestamp": null,
+          "labels": {
+            "SampleApp": "gateway"
+          }
+        },
+        "spec": {
+          "containers": [
+            {
+              "name": "gateway",
+              "image": "servicesregistry.azurecr.io/ir/gateway:latest",
+              "env": [
+                {
+                  "name": "ASPNETCORE_ENVIRONMENT",
+                  "value": "Docker"
+                }
+              ],
+              "resources": {},
+              "terminationMessagePath": "/dev/termination-log",
+              "terminationMessagePolicy": "File",
+              "imagePullPolicy": "Always",
+              "securityContext": {
+                "privileged": false
+              }
+            }
+          ],
+          "restartPolicy": "Always",
+          "terminationGracePeriodSeconds": 30,
+          "dnsPolicy": "ClusterFirst",
+          "securityContext": {},
+          "imagePullSecrets": [
+            {
+              "name": "servicesregistry"
+            }
+          ],
+          "schedulerName": "default-scheduler"
+        }
+      },
+      "strategy": {
+        "type": "RollingUpdate",
+        "rollingUpdate": {
+          "maxUnavailable": "25%",
+          "maxSurge": "25%"
+        }
+      },
+      "revisionHistoryLimit": 10,
+      "progressDeadlineSeconds": 600
+    },
+    "status": {}
+  }

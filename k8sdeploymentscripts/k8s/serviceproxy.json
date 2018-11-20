@@ -1,0 +1,25 @@
+{
+    "kind": "Service",
+    "apiVersion": "v1",
+    "metadata": {
+      "name": "proxy",
+      "namespace": "development",
+      "labels": {
+        "SampleApp": "proxy"
+      }
+    },
+    "spec": {
+      "ports": [
+        {
+          "protocol": "TCP",
+          "port": 5011,
+          "targetPort": 80
+        }
+      ],
+      "selector": {
+        "SampleApp": "proxy"
+      },
+      "sessionAffinity": "None"
+    },
+    "status": {}
+  }

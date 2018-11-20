@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: audit-dbup
+spec:
+  containers:
+  - name: audit-dbup-container
+    image: servicesregistry.azurecr.io/ir/audit-dbup:latest
+  imagePullSecrets:
+  - name: servicesregistry

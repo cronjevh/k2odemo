@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: deal-dbup
+spec:
+  containers:
+  - name: deal-dbup-container
+    image: servicesregistry.azurecr.io/ir/deal-dbup:latest
+  imagePullSecrets:
+  - name: servicesregistry

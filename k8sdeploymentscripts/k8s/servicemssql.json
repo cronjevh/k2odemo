@@ -1,0 +1,26 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "mssql",
+    "namespace": "development",
+    "labels": {
+      "SampleApp": "mssql"
+    }
+  },
+  "spec": {
+    "ports": [
+      {
+        "protocol": "TCP",
+        "port": 1433,
+        "targetPort": 1433
+        }
+    ],
+    "selector": {
+      "SampleApp": "mssql"
+    },
+    "type": "ClusterIP",
+    "sessionAffinity": "None"
+  },
+  "status": {}
+}
